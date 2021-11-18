@@ -1,0 +1,96 @@
+<div class="titre">
+    <h1> Restaurant Chez Gusteau </h1>
+</div>
+<div class="container">
+    <form [formGroup]="myFormGroup" (ngSubmit)="submit()">
+        <p-card>
+            <ng-template pTemplate="header">
+                <h2>Créer un compte</h2>
+            </ng-template>
+
+            <div class="username">
+                <div class="texte">
+                    Nom
+                </div>
+                    <input type="text" id="inputtext" pInputText formControlName="name">
+                    <div class="invalid">
+                    <p *ngIf="myFormGroup.controls['name'].invalid">
+                        {{myFormGroup.controls['name'].errors ? myFormGroup.controls['name'].errors['TropCourt'] : ''}}
+                    </p> 
+                    </div>
+            </div>
+
+            <div class="username">
+                <div class="texte">
+                    Téléphone
+                </div>
+                    <input type="text" id="inputtext" pInputText formControlName="tel"> 
+                    <div class="invalid">
+                    {{myFormGroup.controls['tel'].errors ? myFormGroup.controls['tel'].errors['TropCourt'] : ''}} 
+                    </div>
+            </div>
+
+            <div class="username">
+                <div class="texte">
+                    Adresse Email
+                </div>
+                    <input type="text" id="inputtext" pInputText formControlName="email" class="p-invalid"> 
+                    <div class="invalid">
+                        <p *ngIf="myFormGroup.controls['email'].value && myFormGroup.controls['email'].invalid"><small class="p-invalid">Cet email n'est pas valide</small></p>
+                    </div>
+            </div>
+
+            <div class="username">
+                <div class="texte">
+                    Password
+                </div>
+                    <p-password formControlName="password">
+                        <ng-template pTemplate="footer">
+                            <p-divider></p-divider>
+                            <ul class="p-pl-2 p-ml-2 p-mt-0" style="line-height: 1.5">
+                                <li>Au moins une majuscule</li>
+                                <li>Au moins un caractère spécial</li>
+                                <li>Minimum 6 characters</li>
+                            </ul>
+                        </ng-template>
+                    </p-password>
+            </div>
+            <ng-template pTemplate="footer">
+                <div>
+                    <button pButton type="submit" [disabled]="!myFormGroup.valid" class="p-button-success p-button-rounded p-button-lg" label="Créer votre compte"></button>
+                </div>
+            </ng-template>
+        </p-card>
+    </form>
+</div>
+
+
+<p-toast position="bottom-center" key="valid" (onClose)="onConfirm()" [baseZIndex]="5000" [showTransformOptions]="'translateX(100%)'">
+    <ng-template let-message pTemplate="message">
+        <div class="p-flex p-flex-column" style="flex: 1">
+            <div class="p-text-center">
+                <h4>{{message.detail}}</h4>
+            </div>
+            <div class="p-grid p-fluid">
+                <div class="p-col-6">
+                    <button type="button" pButton (click)="onConfirm()" label={{message.summary}} class={{message.styleClass}}></button>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-toast>
+
+<p-toast position="bottom-center" key="notValid" (onClose)="cancel()" [baseZIndex]="5000" [showTransformOptions]="'translateX(100%)'">
+    <ng-template let-message pTemplate="message">
+        <div class="p-flex p-flex-column" style="flex: 1">
+            <div class="p-text-center">
+                <h4>{{message.detail}}</h4>
+            </div>
+            <div class="p-grid p-fluid">
+                <div class="p-col-6">
+                    <button type="button" pButton (click)="cancel()" label={{message.summary}} class={{message.styleClass}}></button>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-toast>

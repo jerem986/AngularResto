@@ -1,0 +1,9 @@
+@font-face {
+    font-family: "YourFontFamily";
+    src: local("YourFontFamily"), url("./Authentic\ Ratatouille_PersonalUseOnly.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "NormalFont";
+    src: local("NormalFont"), url("./LEMONMILK-RegularItalic.ttf") format("truetype");
+}

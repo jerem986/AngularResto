@@ -1,0 +1,90 @@
+p-card{
+    display: block;
+    // float: left;
+    height: 50%;
+    width: 110%;
+    border: 2px solid rgb(168, 190, 170);
+    border-radius: 10px;
+    margin:left ;
+    font-size: 35px;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    color:rgb(168, 190, 170);
+    font-weight: bolder;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+}
+input{
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+}
+textarea{
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+}
+.username{
+    text-align: left;
+    padding-left: 4vw;
+    font-size : 20px;
+}
+
+.texte{
+    margin-left: 10px;
+}
+
+.invalid{
+    font-size: 13px;
+    color: red;
+}
+
+.box {
+    padding-left: -10px;
+  }
+  
+  .box select {
+    background-color: #fdfdfd;
+    color: gray;
+    padding: 10px;
+    width: 200px;
+    border: none;
+    font-size: 20px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    -webkit-appearance: button;
+    appearance: button;
+    outline: none;
+  }
+  
+  .box::before {
+    content: "\f13a";
+    //font-family: FontAwesome;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20%;
+    height: 100%;
+    text-align: center;
+    //font-size: 28px;
+    line-height: 45px;
+    color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+  }
+  
+  .box:hover::before {
+    color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  .box select option {
+    padding: 30px;
+  }
+
+  .box{
+    margin-bottom: 20px;
+  }
+
+.container{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: baseline;
+	align-content: stretch;
+}

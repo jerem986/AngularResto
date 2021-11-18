@@ -1,0 +1,16 @@
+
+<div class="container">
+    <div *ngFor="let item of value1">
+        <div class="menuDuJour">
+            <p-card>
+                <ng-template pTemplate="header">
+                    item {{item.title}}
+                </ng-template>
+                On pourra add ici {{item.url}}
+                <ng-template pTemplate="footer">
+                    Footer content here numero {{item.url}}
+                </ng-template>
+            </p-card>
+        </div>
+    </div>
+</div>

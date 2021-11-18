@@ -1,0 +1,37 @@
+
+h2{
+    font-family:'Courier New', Courier, monospace;
+    font-weight: bolder;
+    color: gray;
+    font-size: 28px;
+}
+p-card{
+    display: block;
+    // float: left;
+    height: 50%;
+    width: 30%;
+    border: 2px solid rgb(168, 190, 170);
+    border-radius: 10px;
+    margin:auto;
+    font-size: 35px;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    color:rgb(168, 190, 170);
+    font-weight: bolder;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+}
+
+.username{
+    text-align: left;
+    padding-left: 4vw;
+    font-size : 20px;
+}
+
+.texte{
+    margin-left: 10px;
+}
+
+.invalid{
+    font-size: 13px;
+    color: red;
+}

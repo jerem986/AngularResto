@@ -1,0 +1,70 @@
+.container{
+    position: relative;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: 100px;
+}
+
+.tel{
+    display: block;
+    float: left;
+    height: 100%;
+    width: 30vw;
+    border: 2px solid rgb(168, 190, 170);
+    border-radius: 10px;
+    margin-left: 8vw;
+    font-size: 35px;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    color:rgb(168, 190, 170);
+    font-weight: bolder;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+}
+
+
+// .conn{
+//     display: block;
+//     float: left;
+//     height: 18vw;
+//     width: 30vw;
+//     border: 2px solid rgb(168, 190, 170);
+//     border-radius: 10px;
+//     margin-left: 4vw;
+//     font-size: 35px;
+//     font-family: 'Courier New', Courier, monospace;
+//     text-align: center;
+//     color:rgb(168, 190, 170);
+//     font-weight: bolder;
+// }
+
+.telpic{
+    border-radius: 50%;
+    border : 2px solid rgb(168, 190, 170);
+    margin-top: 1vw;
+    height: 100px;
+    margin-bottom: -1vw;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+}
+
+// .connpic{
+//     border-radius: 50%;
+//     border : 2px solid rgb(168, 190, 170);
+//     margin-top: 1vw;
+//     height: 30%;
+//     margin-bottom: -1vw;
+// }
+
+.text{
+    color: grey;
+    font-size: 20px;
+    padding-left: 1vw;
+    padding-right: 1vw;
+}
+
+button{
+    border-radius: 40%;
+    float:right;
+    margin-right: 1vw;
+    margin-bottom: 1vw;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)
+}

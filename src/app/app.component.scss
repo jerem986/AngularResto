@@ -1,0 +1,87 @@
+.layout-sidebar{
+    left: 0;
+    top: 50px;
+    height: 100%;
+    background-color: white;
+    width: 18vw;
+    flex-direction: column;
+    //border-right: rgb(0, 0, 0) 2px solid;
+    display: flex;
+    position:sticky;
+    // overflow: visible;
+    padding: 10px;
+}
+
+img{
+    justify-content: center;
+    align-items: center;
+    width: 17vw;
+}
+
+.display{
+    display: flex;
+    flex-direction:row;
+}
+li{
+    text-decoration: none;
+    list-style-type: none;
+}
+
+.try{
+    //width: 80vw;
+    flex: 1;
+}
+
+.roundpoint{
+    padding-left: 5vh;
+    padding-top: 75px;
+}
+.p-speeddial-semi-circle {
+    &.p-speeddial-direction-right {
+        left: 0;
+        top: calc(50% - 2rem);
+    }
+}
+
+button{
+    font-family:'Courier New', Courier, monospace;
+}
+
+::ng-deep {
+    .p-element.p-speeddial-item a {
+        background-color: rgb(157, 206, 171);
+        //background-color: rgb(168, 190, 170);
+        ;
+    }
+}
+
+.botPlace{
+    margin-top: 250px;
+}
+
+.logoco{
+    position: fixed;
+    display: block;
+    top: 70px;
+    right : 0px;
+    cursor: pointer;
+    z-index: 1;
+}
+
+::ng-deep{
+    .logoco .p-button{
+        background-color: rgb(157, 206, 171);
+        border-color: rgb(255, 255, 255);
+        width : 50px;
+        height: 50px;
+    }
+}
+
+::ng-deep{
+    .logoco .p-button:hover{
+    background-color: rgb(181, 226, 180);
+    border-color: rgb(255, 255, 255);
+    }
+}
+
+

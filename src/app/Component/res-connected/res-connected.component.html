@@ -1,0 +1,44 @@
+<div class="titre">
+    <h1> Réservation </h1>
+</div>
+<div class="container">
+    <p-steps [model]="items" [(activeIndex)]="switchSteps"></p-steps>
+    <form [formGroup]="myFormGroup">
+        <div *ngIf="this.switchSteps == 0">
+            Réservation au nom de {{username}}
+
+            Pour combien de personne?
+            <div class="box">
+            <select  formControlName="nbPers">
+                <option [ngValue]="1">1</option>
+                <option [ngValue]="2">2</option>
+                <option [ngValue]="3">3</option>
+                <option [ngValue]="4">4</option>
+                <option [ngValue]="5">5</option>
+                <option [ngValue]="6">6</option>
+                <option [ngValue]="7">7</option>
+                <option [ngValue]="8">8</option>
+                <option [ngValue]="9">9</option>
+                <option [ngValue]="10">10</option>
+            </select> 
+            </div>
+        </div>
+        <div *ngIf="this.switchSteps == 1">
+            <button (click)="previousMonth()">mois d'avant</button>
+            {{this.month}}
+            <button (click)="nextMonth()">mois d'après</button>
+            <div *ngFor="let item of monthNumber | fillArray">
+                TropCourt
+            </div>
+            <div *ngFor="let item of numPreDay|fillArray">
+                <button> red</button>
+            </div>
+        </div>
+        <div *ngIf="this.switchSteps == 2">
+            <app-category></app-category>
+        </div>
+    </form>
+
+   <button (click)="previous()">Previous</button>
+   <button (click)="next()">Next</button>
+</div>

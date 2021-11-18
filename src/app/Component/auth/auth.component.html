@@ -1,0 +1,71 @@
+<div class="titre">
+    <h1> Restaurant Chez Gusteau </h1>
+</div>
+<div class="container">
+    <form [formGroup]="myFormGroup" (ngSubmit)="submit()">
+        <p-card>
+            <ng-template pTemplate="header">
+                <h2>S'identifer</h2>
+            </ng-template>
+            <div class="username">
+                <div class="texte">
+                    Adresse Email
+                </div>
+                    <input type="text" id="inputtext" pInputText formControlName="email" class="p-invalid" > 
+            </div>
+            <div class="username">
+                <div class="texte">
+                    Password
+                </div>
+                    <p-password  formControlName="password" [feedback]="false"></p-password>
+            </div>
+            <ng-template pTemplate="footer">
+                <div>
+                    <button pButton type="submit" [disabled]="!myFormGroup.valid" class="p-button-success p-button-rounded p-button-lg" label="Sign In"></button>
+                </div>
+            </ng-template>
+        </p-card>
+        <div class="bottom">
+            <div class="adjust1"> 
+                Nouveau sur notre site?
+            </div> 
+            <div  class="adjustbutton">
+                <button pButton type="button" class="p-button-success p-button-rounded p-button-outlined p-button-lg" label="Créer votre compte" (click)="Redirect()"></button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<p-toast position="bottom-center" key="valid" (onClose)="onConfirm()" [baseZIndex]="5000" [showTransformOptions]="'translateX(100%)'">
+    <ng-template let-message pTemplate="message">
+        <div class="p-flex p-flex-column" style="flex: 1">
+            <div class="p-text-center">
+                <h4>{{message.detail}}</h4>
+            </div>
+            <div class="p-grid p-fluid">
+                <div class="p-col-6">
+                    <button type="button" pButton (click)="onConfirm()" label={{message.summary}} class={{message.styleClass}} ></button>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-toast>
+
+<p-toast position="bottom-center" key="notValid" (onClose)="cancel()" [baseZIndex]="5000" [showTransformOptions]="'translateX(100%)'">
+    <ng-template let-message pTemplate="message">
+        <div class="p-flex p-flex-column" style="flex: 1">
+            <div class="p-text-center">
+                <h4>{{message.detail}}</h4>
+            </div>
+            <div class="p-grid p-fluid">
+                <div class="p-col-6">
+                    <button type="button" pButton (click)="cancel()" label={{message.summary}} class={{message.styleClass}}></button>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-toast>
+
+
+
+<!-- ajout de bienvenue avec le nom lorsque je recupere le token je peux aller rechercher le nom du client dans session? -->

@@ -1,0 +1,74 @@
+<div class="container">
+    <form [formGroup]="myFormGroup" (ngSubmit)="submit()">
+        <p-card>
+            <ng-template pTemplate="header">
+                <h2>Ajout à la carte</h2>
+            </ng-template>
+            <div class="username">
+                <div class="texte">
+                    Catégorie
+                </div>
+                <div class="box">
+                    <select formControlName="categoryId">
+                        <option *ngFor="let item of listCategory" [ngValue]="item.id">{{item.type}}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="username">
+                <div class="texte">
+                    Nom
+                </div>
+                    <input type="text" id="inputtext" pInputText formControlName="Plat"> 
+                    <div class="invalid">
+                    {{myFormGroup.controls['Plat'].errors ? myFormGroup.controls['Plat'].errors['TropCourt'] : ''}} 
+                    </div>
+            </div>
+
+            <div class="username">
+                <div class="texte">
+                    Description
+                </div>
+                    <textarea pInputTextarea formControlName="Description" class="p-invalid"></textarea>
+                    
+                    <div class="invalid">
+                        {{myFormGroup.controls['Description'].errors ? myFormGroup.controls['Description'].errors['TropCourt'] : ''}} 
+                        <p *ngIf="myFormGroup.controls['Description'].value && myFormGroup.controls['Description'].invalid"></p>
+
+                    </div>
+            </div>
+
+            <div class="username">
+                <div class="texte">
+                    Prix
+                </div>
+                    <input type="text" id="inputtext" pInputText formControlName="Prix" class="p-invalid"> 
+                    <div class="invalid">
+                        <p *ngIf="myFormGroup.controls['Prix'].value && myFormGroup.controls['Prix'].invalid"></p>
+                    </div>
+            </div>
+
+            <ng-template pTemplate="footer">
+                <div>
+                    <button pButton type="submit" [disabled]="!myFormGroup.valid" class="p-button-success p-button-rounded p-button-lg" label="Ajouter"></button>
+                </div>
+            </ng-template>
+        </p-card>
+    </form>
+    <div class="containerList">
+        <div class="username">
+            <div class="texte">
+                Catégorie
+            </div>
+            <div class="box">
+                <select [(ngModel)]="varForList">
+                    <option *ngFor="let item of listCategory" [ngValue]="item.id">{{item.type}}</option>
+                </select>
+            </div>
+            <app-listrepas [selectlist]="varForList"></app-listrepas>
+
+            <!-- <app-listrepas *ngIf="varForList" [selectedItem]="varForList" (monEvent)="reponseDuChildren($event)" ></app-listrepas> -->
+    </div>
+</div>
+
+<!-- <input type="text" id="inputtext" pInputText formControlName="Description" class="p-invalid">  -->

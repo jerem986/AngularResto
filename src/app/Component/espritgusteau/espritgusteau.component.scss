@@ -1,0 +1,38 @@
+
+.entete{
+    font-family:'Courier New', Courier, monospace;
+    text-align: center;
+    font-size: 35px;
+    color: gray;
+    padding-bottom: 150px;
+    padding-top: 100px;
+}
+
+.container{
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    font-family:'Courier New', Courier, monospace;
+}
+
+.img1{
+    position: block;
+}
+
+h2{
+    font-size: 35px;
+    color: gray;
+    padding-bottom: 50px;
+    text-align: center;
+    padding-top: 5vw;
+    padding-bottom: 3vw;
+}
+.text1{
+    position: block;
+}
+
+p{
+    font-style:oblique;
+    
+}
+
