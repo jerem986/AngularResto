@@ -15,8 +15,7 @@ export class TokenInterceptor implements HttpInterceptor {
     private _session : SessionService
   ) {}
 
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {  
-    console.log("interceptor : job's done");  
+  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     if(this._session.user != null) {
       let token = localStorage.getItem("TOKEN");
       let clone = request.clone({setHeaders: { "Authorization": "Bearer " + token }});
@@ -25,6 +24,3 @@ export class TokenInterceptor implements HttpInterceptor {
     return next.handle(request);
   }
 }
-
-
-// si une session existe(if) -> on récupère le token et on l'ajoute dans la request avant l'envoi de l'information dans l'API.

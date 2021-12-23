@@ -34,6 +34,8 @@ import { StepsModule } from 'primeng/steps';
 import { ListrepasComponent } from './Component/adminchild/repas/listrepas/listrepas.component';
 import { ResConnectedComponent } from './Component/res-connected/res-connected.component';
 import { FillArrayPipe } from './Pipe/fill-array.pipe';
+import { CalendarModule } from 'primeng/calendar';
+import { SelectButtonModule } from 'primeng/selectbutton';
 
 
 
@@ -76,7 +78,9 @@ import { FillArrayPipe } from './Pipe/fill-array.pipe';
     TableModule,
     TreeSelectModule,
     InputTextareaModule,
+    CalendarModule,
     StepsModule,
+    SelectButtonModule
     
   ],
   providers: [

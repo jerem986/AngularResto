@@ -6,7 +6,7 @@
     <form [formGroup]="myFormGroup">
         <div *ngIf="this.switchSteps == 0">
             Réservation au nom de {{username}}
-
+            <br>
             Pour combien de personne?
             <div class="box">
             <select  formControlName="nbPers">
@@ -21,24 +21,52 @@
                 <option [ngValue]="9">9</option>
                 <option [ngValue]="10">10</option>
             </select> 
+            <br>
+            Pour quel service voulez-vous réserver?
+            <br>
+            <select  formControlName="service">
+                <option [ngValue]="0">Soir</option>
+                <option [ngValue]="1">Midi</option>
+            </select> 
+            
             </div>
         </div>
-        <div *ngIf="this.switchSteps == 1">
-            <button (click)="previousMonth()">mois d'avant</button>
-            {{this.month}}
-            <button (click)="nextMonth()">mois d'après</button>
-            <div *ngFor="let item of monthNumber | fillArray">
-                TropCourt
-            </div>
-            <div *ngFor="let item of numPreDay|fillArray">
-                <button> red</button>
+        <div *ngIf="this.switchSteps == 1" class="step1">
+            <p-calendar formControlName="date" 
+                        [inline]="true"
+                        [minDate]="today"
+                        [disabledDates]="invalidDates"
+                        ></p-calendar>
+            <div class="containerCard" >
+                <div *ngIf="!myFormGroup.get('date')?.value">                    
+                    <img alt="Card" src="../../../assets/Reservation/continuous-one-line-drawing-restaurant-260nw-1195733482.jpg">
+                </div> 
+                <div *ngIf="myFormGroup.get('date')?.value">
+                    <p>A quelle heure souhaitez-vous réserver votre venue?</p>
+                    <div *ngIf="myFormGroup.get('service')?.value == 1">
+                        <p-selectButton [options]="midiHours" formControlName="heure" optionLabel="name" optionValue="value" >
+                        </p-selectButton>
+                    </div>
+                    <div *ngIf="myFormGroup.get('service')?.value == 0">
+                        <p-selectButton [options]="NoonHours" formControlName="heure" optionLabel="name" optionValue="value">
+                        </p-selectButton>
+                    </div>
+                </div>
             </div>
         </div>
         <div *ngIf="this.switchSteps == 2">
-            <app-category></app-category>
+            {{myFormGroup.value.heure}}
+            <br>
+            {{myFormGroup.value.nbPers}}
+            <br>
+            {{myFormGroup.value.date.getDate()}} {{myFormGroup.value.date.getMonth()}}
+            <br>
+            {{myFormGroup.value.service}}
+            <br>
+            <button pButton (click)="AddReservation()">Valide</button>
         </div>
     </form>
 
-   <button (click)="previous()">Previous</button>
-   <button (click)="next()">Next</button>
+   <button pButton (click)="previous()" [disabled]="this.switchSteps == 0" >Previous</button>
+   <button pButton (click)="next()" [disabled]="this.switchSteps == 2">Next</button>
 </div>

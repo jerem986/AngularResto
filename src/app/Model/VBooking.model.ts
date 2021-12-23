@@ -1,6 +1,6 @@
 export interface VBooking{
-    DateDeRes : Date,
-    IsNoon : boolean,
-    Total : number
+    dateDeRes : Date,
+    isNoon : number,
+    total : number
 }
 

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MenuItem } from 'primeng/api';
+import { VBooking } from 'src/app/Model/VBooking.model';
+import { ReservationService } from 'src/app/Service/Reservation/reservation.service';
 import { SessionService } from 'src/app/Service/session/session.service';
 import { MinChar } from 'src/app/Validator/MinChar.validator';
 
@@ -11,48 +13,80 @@ import { MinChar } from 'src/app/Validator/MinChar.validator';
 })
 export class ResConnectedComponent implements OnInit {
 
+
+  get invalidDates() {
+    return this.testVBooking?.filter(b => b.total + this.myFormGroup.controls["nbPers"].value > 30 && b.isNoon == this.myFormGroup.value.service )  //ajout filtre / total salle perso + reser
+      .map(b => new Date(b.dateDeRes)) ?? [];
+    }
+    
+  //   get availablePlace(){
+  //   return this.testVBooking.find(b => b.dateDeRes = this.myFormGroup.controls["date"].value ) 
+  // }
+
+  midiHours!: any[];
+  NoonHours!: any[];
+  totalAvalaible?:number
+
+  tempVbooking? : VBooking
+  
+
   items!: MenuItem[]
   switchSteps : number = 0
 
   username? : string  = this._session.user?.name
 
-  myFormGroup : FormGroup = this._formbuild.group({})
+  myFormGroup : FormGroup = this._formbuild.group({
+  })
+
 
   today = new Date()
   monthNumber! : number
   month! : string 
-  test: number =14
-  
-  numPreDay: number = 1
-  numPostDay: number = 7 // on fait 42-nbjour sur le mois - numPreDay
+
+
+  testVBooking! : VBooking[];
+
 
   constructor(
     private _formbuild :FormBuilder,
-    private _session : SessionService
-  ) { }
+    private _session : SessionService,
+    private _reser : ReservationService,
+  ) 
+  {
+      this.midiHours = [
+      { name:"12h00", value : 1 },
+      { name:"12h30", value : 2 },
+      { name:"13h00", value : 3 },
+      { name:"13h30", value : 4 }
+    ],
+    this.NoonHours = [
+      { name:"18h00", value : 5 },
+      { name:"18h30", value : 6 },
+      { name:"19h00", value : 7 },
+      { name:"19h30", value : 8 },
+      { name:"20h00", value : 9 }
+    ]
+  }
 
   ngOnInit(): void {
-  this.items = [
-    {label: 'Step 1'},
-    {label: 'Step 2'},
-    {label: 'Step 3'}
-  ];
+    this._reser.getVBooking(12,2021).subscribe(data => this.testVBooking = data)
 
-  this.myFormGroup = this._formbuild.group({
-    name : this._session.user?.id,
-    nbPers : [null, [Validators.required]]
-    // tel : [null,[Validators.required,MinChar(9),Validators.maxLength(20),]], // regex number? ou + en premiere place?
-    // email : [null,[Validators.required, Validators.email]],
-    // password : [null, Validators.pattern("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[#?!@$%^&*-]).{6,}$")] //regex minimum 6 lettres dont une Uppercase ,une Lowercase et un caractère spécial
-  }, Validators.required)
-
-  console.log(16-2);
-  this.monthNumber = this.today.getMonth()+1
-  this.getMonth()
+    this.items = [
+      {label: 'Step 1'},
+      {label: 'Step 2'},
+      {label: 'Step 3'}
+    ];
+    this.myFormGroup = this._formbuild.group({
+      id : this._session.user?.id,
+      nbPers : [null, [Validators.required]],
+      date: [null, [Validators.required]],
+      service: [null, [Validators.required]],
+      heure:[null, [Validators.required]]
+    }, Validators.required)
   }
 
   next(){
-    this.switchSteps +=1
+    this.switchSteps +=1    
   }
 
   previous(){
@@ -60,101 +94,32 @@ export class ResConnectedComponent implements OnInit {
     this.switchSteps-=1
   }
 
-  getMonth(){
-    switch(this.monthNumber){
-      case 1 :
-        return this.month = "Janvier"
-      case 2 :
-        return this.month = "Février"
-      case 3 :
-        return this.month = "Mars"
-      case 4 :
-        return this.month = "Avril"
-      case 5 : 
-        return this.month = "Mai"
-      case 6 :
-        return this.month = "Juin"
-      case 7 :
-        return this.month = "Juillet"
-      case 8 :
-        return this.month = "Aout"
-      case 9 :
-        return this.month = "Septembre"
-      case 10 :
-        return this.month = "Octobre"
-      case 11 : 
-        return this.month = "Novembre"
-      case 12 :
-        return this.month = "Décembre"
-      default :
-        return this.month = ""
-    }
+  AddReservation(){
+    console.log(42);
+    
   }
 
-  nextMonth(){
-    if(this.monthNumber == 12){
-      this.monthNumber = 1
-      this.getMonth()
-    }
-    else{
-      this.monthNumber++
-      this.getMonth()
+//   refreshDate(){
+//     // console.log((this.myFormGroup.value.date).getDate());
+//     // console.log((this.testVBooking));
+//     //console.log(this.myFormGroup.value.service);
+//     // console.log(this.myFormGroup.get('date'));
+//     // console.log(this.myFormGroup.controls['date'].value);
+//     this.testVBooking.map(b => new Date(b.dateDeRes))
+//     console.log(42);
+    
+//     console.log(this.testVBooking);
+    
+//     this.tempVbooking = this.testVBooking.find(b => b.dateDeRes == this.myFormGroup.value.date
+//     && b.isNoon == this.myFormGroup.value.service )
+// console.log(43);
 
-    }
-  }
-  previousMonth(){
-    if(this.monthNumber == 1){
-      this.monthNumber = 12
-      this.getMonth()
-    }
-    else{
-      this.monthNumber--
-      this.getMonth()
-      
-    }
-  }
+//     console.log(this.testVBooking);
+    
+//     console.log(this.tempVbooking);
+    
+//   }
 
 }
 
-// switch(type : string){
-//   switch (type) {
-//     case 'bug':
-//       return 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Pok%C3%A9mon_Bug_Type_Icon.svg/120px-Pok%C3%A9mon_Bug_Type_Icon.svg.png'
-//     case 'dark':
-//     return 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Pok%C3%A9mon_Dark_Type_Icon.svg/120px-Pok%C3%A9mon_Dark_Type_Icon.svg.png'
-//     case 'dragon':
-//       return 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Pok%C3%A9mon_Dragon_Type_Icon.svg/120px-Pok%C3%A9mon_Dragon_Type_Icon.svg.png'
-//     case 'electric':
-//       return  'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Pok%C3%A9mon_Electric_Type_Icon.svg/120px-Pok%C3%A9mon_Electric_Type_Icon.svg.png'
-//     case 'fairy':
-//       return 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Pok%C3%A9mon_Fairy_Type_Icon.svg/120px-Pok%C3%A9mon_Fairy_Type_Icon.svg.png'
-//     case 'fighting':
-//     return 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Pok%C3%A9mon_Fighting_Type_Icon.svg/120px-Pok%C3%A9mon_Fighting_Type_Icon.svg.png'
-//     case 'fire':
-//       return 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Pok%C3%A9mon_Fire_Type_Icon.svg/120px-Pok%C3%A9mon_Fire_Type_Icon.svg.png'
-//     case 'flying':
-//       return 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Pok%C3%A9mon_Flying_Type_Icon.svg/120px-Pok%C3%A9mon_Flying_Type_Icon.svg.png'
-//     case 'ghost':
-//       return 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Pok%C3%A9mon_Ghost_Type_Icon.svg/120px-Pok%C3%A9mon_Ghost_Type_Icon.svg.png'
-//     case 'grass':
-//       return 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Pok%C3%A9mon_Grass_Type_Icon.svg/120px-Pok%C3%A9mon_Grass_Type_Icon.svg.png'
-//     case 'ground':
-//       return 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Pok%C3%A9mon_Ground_Type_Icon.svg/120px-Pok%C3%A9mon_Ground_Type_Icon.svg.png'
-//     case 'ice':
-//       return 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Pok%C3%A9mon_Ice_Type_Icon.svg/120px-Pok%C3%A9mon_Ice_Type_Icon.svg.png'
-//     case 'normal':
-//       return 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Pok%C3%A9mon_Normal_Type_Icon.svg/120px-Pok%C3%A9mon_Normal_Type_Icon.svg.png'
-//     case 'poison':
-//       return 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Pok%C3%A9mon_Poison_Type_Icon.svg/120px-Pok%C3%A9mon_Poison_Type_Icon.svg.png'
-//     case 'psychic':
-//       return 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Pok%C3%A9mon_Psychic_Type_Icon.svg/120px-Pok%C3%A9mon_Psychic_Type_Icon.svg.png'
-//     case 'rock':
-//       return 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Pok%C3%A9mon_Rock_Type_Icon.svg/120px-Pok%C3%A9mon_Rock_Type_Icon.svg.png'
-//     case 'steel':
-//       return 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Pok%C3%A9mon_Steel_Type_Icon.svg/120px-Pok%C3%A9mon_Steel_Type_Icon.svg.png'
-//     case 'water':
-//       return 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Pok%C3%A9mon_Water_Type_Icon.svg/120px-Pok%C3%A9mon_Water_Type_Icon.svg.png'
-//     default:
-//       return 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWFJvitmOFD3FJkE5HG8FJi4H_Mt5SdXntJA&usqp=CAU'
-//   }
-// } 
+
