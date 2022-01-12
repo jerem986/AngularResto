@@ -1,0 +1,14 @@
+.container{
+    font-family:'Courier New', Courier, monospace;
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	align-content: stretch;
+}
+
+img{
+    height: 75vh;
+    width: auto;
+}

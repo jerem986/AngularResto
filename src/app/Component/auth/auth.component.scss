@@ -1,6 +1,13 @@
 input{
     margin: 10px;
 }
+.container{
+    display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: center;
+}
 
 p-password{
     margin: 10px;
@@ -16,10 +23,10 @@ p-card{
     display: block;
     // float: left;
     height: 50%;
-    width: 30%;
+    width: 120%;
     border: 2px solid rgb(168, 190, 170);
     border-radius: 10px;
-    margin:auto;
+    margin: auto;
     font-size: 35px;
     font-family: 'Courier New', Courier, monospace;
     text-align: center;
@@ -44,6 +51,8 @@ p-card{
     font-family:'Courier New', Courier, monospace;
     font-weight: bolder;
     color: gray;
+    width:120%;
+    text-align: center;
 }
 
 .adjust1:after {
@@ -56,15 +65,31 @@ p-card{
 }
 
 .bottom{
-    padding-top: 5%;
+    padding-top: 12%;
     display: flex;
 	flex-direction: column;
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: center;
 	align-content: stretch;
+    margin: auto;
 }
 
 .adjustbutton{
     padding-top: 8px;
+}
+
+.googleButton{
+    height: auto;
+    width : 250px;
+    display: block;
+    text-align: center;
+    cursor: pointer;
+}
+
+.containerGoogle{
+    display: block;
+    margin: auto;
+    padding-left : 25%;
+    padding-top: 10%;
 }

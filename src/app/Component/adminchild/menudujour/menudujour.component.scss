@@ -5,11 +5,63 @@
 	justify-content: space-around;
 	align-items: center;
 	align-content: stretch;
-    width:80vw;
+    width:82vw;
     margin-top: 2vw;
 }
+
+
 
 .menuDuJour{
     width: 100%;
     display: block;
+}
+
+.day{
+	color: rgb(168, 190, 170);
+	font-size: larger;
+	font-weight:bold;
+}
+
+::ng-deep{
+
+	.p-button-rounded.p-button-text{
+		width: 20px;
+	}
+	.p-button-icon{
+		color:black ;
+	}
+	.p-button:focus{
+		box-shadow: 0 0 0 0.2rem rgb(168, 190, 170);
+	}
+}
+
+.header{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+	align-content: stretch;
+}
+
+.username{
+    text-align: left;
+    padding-left: 4vw;
+    font-size : 20px;
+}
+
+.texte{
+    margin-left: 10px;
+}
+
+p-dialog{
+    font-size: 35px;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bolder;
+}
+input{
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+}
+textarea{
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
 }

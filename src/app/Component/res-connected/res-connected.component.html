@@ -3,70 +3,100 @@
 </div>
 <div class="container">
     <p-steps [model]="items" [(activeIndex)]="switchSteps"></p-steps>
+    <div class="stepButton">
+        <button pButton (click)="previous()" [disabled]="this.switchSteps == 0" >Previous</button>
+        <button pButton (click)="next()" [disabled]="this.switchSteps == 2">Next</button>
+    </div>
     <form [formGroup]="myFormGroup">
-        <div *ngIf="this.switchSteps == 0">
-            Réservation au nom de {{username}}
-            <br>
-            Pour combien de personne?
+        <div *ngIf="this.switchSteps == 0" class="step0">
             <div class="box">
-            <select  formControlName="nbPers">
-                <option [ngValue]="1">1</option>
-                <option [ngValue]="2">2</option>
-                <option [ngValue]="3">3</option>
-                <option [ngValue]="4">4</option>
-                <option [ngValue]="5">5</option>
-                <option [ngValue]="6">6</option>
-                <option [ngValue]="7">7</option>
-                <option [ngValue]="8">8</option>
-                <option [ngValue]="9">9</option>
-                <option [ngValue]="10">10</option>
-            </select> 
-            <br>
-            Pour quel service voulez-vous réserver?
-            <br>
-            <select  formControlName="service">
-                <option [ngValue]="0">Soir</option>
-                <option [ngValue]="1">Midi</option>
-            </select> 
-            
+                <div class="nbPers">
+                    Sélectionnez un nombre de personnes
+                    <select  formControlName="nbPers">
+                        <option class="opt" [ngValue]="1">1</option>
+                        <option [ngValue]="2">2</option>
+                        <option [ngValue]="3">3</option>
+                        <option [ngValue]="4">4</option>
+                        <option [ngValue]="5">5</option>
+                        <option [ngValue]="6">6</option>
+                        <option [ngValue]="7">7</option>
+                        <option [ngValue]="8">8</option>
+                        <option [ngValue]="9">9</option>
+                        <option [ngValue]="10">10</option>
+                    </select> 
+                    <br>
+                    Pour quel service voulez-vous réserver?
+                    <br>
+                            <select  formControlName="service" > 
+                                <option [ngValue]="0">Soir</option>
+                                <option [ngValue]="1">Midi</option>
+                            </select> 
+                    
+                </div>
             </div>
         </div>
         <div *ngIf="this.switchSteps == 1" class="step1">
-            <p-calendar formControlName="date" 
-                        [inline]="true"
-                        [minDate]="today"
-                        [disabledDates]="invalidDates"
-                        ></p-calendar>
+            <p-calendar formControlName="DateDeRes" 
+            [inline]="true"
+            [minDate]="today"
+            [disabledDates]="invalidDates"
+            ></p-calendar>
             <div class="containerCard" >
-                <div *ngIf="!myFormGroup.get('date')?.value">                    
+                <div *ngIf="!myFormGroup.get('DateDeRes')?.value">                    
                     <img alt="Card" src="../../../assets/Reservation/continuous-one-line-drawing-restaurant-260nw-1195733482.jpg">
                 </div> 
-                <div *ngIf="myFormGroup.get('date')?.value">
+                <div *ngIf="myFormGroup.get('DateDeRes')?.value">
                     <p>A quelle heure souhaitez-vous réserver votre venue?</p>
                     <div *ngIf="myFormGroup.get('service')?.value == 1">
-                        <p-selectButton [options]="midiHours" formControlName="heure" optionLabel="name" optionValue="value" >
+                        <p-selectButton [options]="midiHours" formControlName="Horaire" optionLabel="name" optionValue="value" >
                         </p-selectButton>
                     </div>
                     <div *ngIf="myFormGroup.get('service')?.value == 0">
-                        <p-selectButton [options]="NoonHours" formControlName="heure" optionLabel="name" optionValue="value">
+                        <p-selectButton [options]="NoonHours" formControlName="Horaire" optionLabel="name" optionValue="value">
                         </p-selectButton>
                     </div>
                 </div>
             </div>
         </div>
-        <div *ngIf="this.switchSteps == 2">
-            {{myFormGroup.value.heure}}
-            <br>
-            {{myFormGroup.value.nbPers}}
-            <br>
-            {{myFormGroup.value.date.getDate()}} {{myFormGroup.value.date.getMonth()}}
-            <br>
-            {{myFormGroup.value.service}}
-            <br>
-            <button pButton (click)="AddReservation()">Valide</button>
+        <div *ngIf="this.switchSteps == 2" class="step2">
+            <div *ngIf="this.myFormGroup.valid">
+            <h4> 
+                Veuillez vérifier les informations suivantes :
+            </h4>
+                Réservation au nom de {{username}} 
+                <br>
+                <div *ngIf="this.myFormGroup.value.nbPers<2">
+                    Pour 1 personne
+                </div>
+                <div *ngIf="this.myFormGroup.value.nbPers>1">
+                    Pour {{myFormGroup.value.nbPers}} personnes
+                </div>
+                <br>
+                En date du {{myFormGroup.value.DateDeRes |dateFormat}} {{HoursValue[myFormGroup.value.Horaire+1]}}
+            <p>
+                Si ces informations sont correctes veuillez confirmer.
+                <br>
+                Nous vous enverrons une confirmation de réservation sur votre compte et par email
+            </p>
+            </div>
+
+            <div *ngIf="this.myFormGroup.invalid">
+                Les données que vous avez sélectionner sont incomplètes.
+                <br>
+                Veuillez recommencer
+                <br>
+                <br>
+                Merci
+            </div>
+
+
+
+                <button pButton (click)="AddReservation()" [disabled]="this.myFormGroup.invalid " >Valide</button>
+            
+
         </div>
     </form>
-
-   <button pButton (click)="previous()" [disabled]="this.switchSteps == 0" >Previous</button>
-   <button pButton (click)="next()" [disabled]="this.switchSteps == 2">Next</button>
+    
+    
 </div>
+            

@@ -1,18 +1,13 @@
-// ::ng-deep{
-//     p-table{
-//         ng-template{
-//             width:
-
-//         }
-//     }
-// }
-
-// ng-template{
-//     width: 100%;
-// }
-
 p-table{
     ng-template{
         width: 100%;
+    }
+}
+
+::ng-deep{
+    .p-button.p-button-success, .p-buttonset.p-button-success > .p-button, .p-splitbutton.p-button-success > .p-button {
+        color: #ffffff;
+        background: rgb(168, 190, 170);;
+        border: 1px solid #ffffff;
     }
 }

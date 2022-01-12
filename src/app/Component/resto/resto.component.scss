@@ -23,6 +23,7 @@
 }
 h2{
     font-style: italic;
+    font-size: 35px;
 }
 
 .text{
@@ -71,7 +72,72 @@ h2{
 ::ng-deep{
     .p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button {
     background-color: rgb(157, 206, 171);
-}
+    box-shadow: 0 0 0 0.2rem rgb(100, 143, 107);
+    }
+    .p-carousel .p-carousel-content .p-carousel-prev, .p-carousel .p-carousel-content .p-carousel-next{
+        color: grey;
+    }
+    .p-carousel .p-carousel-content .p-carousel-prev:focus, .p-carousel .p-carousel-content .p-carousel-next:focus{
+        box-shadow: 0 0 0 0.2rem rgb(100, 143, 107);
+    }
 } 
+
+.table:hover{
+    transform: scale(1.05);
+}
+
+.product-item-content:hover{
+    img{
+        transform: scale(1.05);
+    }
+}
+
+.takeaway{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+	align-content: stretch;
+    margin-bottom: 1vh;
+}
+
+.txttakeaway {
+    p{
+    font-weight: bold;
+    color: rgb(0, 0, 0);
+    }
+    font-family:'Courier New', Courier, monospace;
+    color: grey;
+    font-size: 30px;
+    text-align: center;
+    padding-bottom: 80px;
+    padding-left: 100px;
+    padding-top: 50px;
+    
+}
+
+.footer{
+    img{
+        width: 100%;
+        border-radius: 12px;
+
+    }
+    font-family:'Courier New', Courier, monospace;
+    font-size: 20px;
+    font-weight: bold;
+    height: auto;
+    color:white;
+    border-radius: 8px;
+    position:relative;
+}
+
+.info{
+    position: absolute;
+    top: 40px;
+    right: 30px;
+}
+
+
 
 

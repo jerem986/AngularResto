@@ -12,11 +12,7 @@ export class ListrepasComponent implements OnInit {
   listRepasRecup! : RepasDetail[]
 
   @Input() set selectlist( id : number){
-    this._repService.GetRepasById(id).subscribe((data : RepasDetail[]) =>{
-      this.listRepasRecup = data,
-      console.log(this.listRepasRecup);
-      
-    })
+    this.GetRepasByIdCategory(id)
   }
 
   constructor(
@@ -25,5 +21,16 @@ export class ListrepasComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  
+  submit(id : number){
+    this._repService.DeleteRepas(id).subscribe(data => {
+      location.reload()
+    })
+  }
 
+  GetRepasByIdCategory(id:number){
+    this._repService.GetRepasById(id).subscribe((data : RepasDetail[]) =>{
+      this.listRepasRecup = data
+    })
+  }
 }

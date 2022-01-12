@@ -45,7 +45,7 @@ export class RegisterComponent implements OnInit {
 }
 
 onConfirm(){
-  this._route.navigate([''])  
+  this._route.navigate(['auth'])  
 }
 
 cancel(){

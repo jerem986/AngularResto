@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { GoogleLoginProvider, SocialAuthService, SocialUser } from 'angularx-social-login';
 import { MessageService } from 'primeng/api';
 import { SessionService } from '../../Service/session/session.service';
 import { WebapiService } from '../../Service/webApi/webapi.service';
@@ -16,6 +17,9 @@ export class AuthComponent implements OnInit {
   emailLocal :string |null
 
   myFormGroup : FormGroup = this._formBuild.group({})
+
+  loginForm!: FormGroup;
+  socialUser!: SocialUser;
   
 
   constructor(   
@@ -23,7 +27,8 @@ export class AuthComponent implements OnInit {
      private _formBuild : FormBuilder,
      private _webApi : WebapiService,
      private _messageService: MessageService,
-     private _session : SessionService
+     private _session : SessionService,
+     private _socialAuthService: SocialAuthService
      ){
         this.emailLocal = localStorage.getItem("Email")
       }
@@ -33,6 +38,21 @@ export class AuthComponent implements OnInit {
       email :new FormControl(this.emailLocal, [Validators.required]),
       password : new FormControl(null, [Validators.required])
     })
+
+    this._socialAuthService.authState.subscribe((user : SocialUser) => {
+      this.socialUser = user;         
+      this._webApi.LoginWithGoogle(this.socialUser).subscribe((data : string) =>{
+        if(data){
+          this._messageService.add({severity : 'success', summary: 'Bienvenue', detail:'connection réussie!!', key : 'valid',styleClass : 'p-button-success p-button-raised p-button-rounded'})
+          this._session.start(data)
+        }
+        else
+        console.log("fail")
+      }, error => {
+        console.log(error);
+        this._messageService.add({severity : 'error', summary: 'rééssayer',key : 'notValid',detail:'Votre email et/ou votre mot de passe est invalide',styleClass : 'p-button-danger p-button-raised p-button-rounded'})
+      })
+    });
   }
 
   Redirect(){
@@ -43,7 +63,6 @@ export class AuthComponent implements OnInit {
       this._webApi.LoginAuth(this.myFormGroup.value).subscribe(data => {
         if(data){
           this._messageService.add({severity : 'success', summary: 'Bienvenue', detail:'connection réussie!!', key : 'valid',styleClass : 'p-button-success p-button-raised p-button-rounded'})
-          console.log("félicitations vous êtes connecté")
           this._session.start(data)
         }
         else
@@ -53,10 +72,18 @@ export class AuthComponent implements OnInit {
   }
 
   onConfirm(){
-      this._route.navigate([''])  
+      this._route.navigate(['resto'])  
     }
 
   cancel(){
     this._messageService.clear()
+  }
+
+  loginWithGoogle(): void {
+    this._socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID)
+  }
+
+  logOut(): void {
+    this._socialAuthService.signOut();
   }
 }

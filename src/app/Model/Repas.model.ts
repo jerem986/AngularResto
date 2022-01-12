@@ -7,8 +7,8 @@ export interface RepasModel{
 
 export interface RepasDetail{
     id : number;
+    plat : string;
+    description : string;
+    prix : number
     categoryId : number;
-    Plat : string;
-    Description : string;
-    Prix : number
 }

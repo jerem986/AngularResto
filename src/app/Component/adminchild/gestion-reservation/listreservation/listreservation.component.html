@@ -1,0 +1,62 @@
+<div class="containerToggle">
+    <p-toggleButton
+            onLabel={{this.onLabel}}
+            offLabel="Réservation Confirmée"
+            onIcon={{this.clock}}
+            offIcon="pi pi-check-circle"
+            [(ngModel)]="changeValidationStatuts"
+            class="toggle"></p-toggleButton>
+</div>
+
+
+<div *ngIf="changeValidationStatuts">
+    <p-table responsiveLayout="scroll" [value]="ListReservation">
+        <ng-template pTemplate="header" class="header">
+            <tr>
+                <th>Client</th>
+                <th>Nb personnes</th>
+                <th>Heure de réservation</th>
+                <th>Confirmer</th>
+                <th>Annuler</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-ListReservation >
+            <tr *ngIf="ListReservation.validationStatuts == 0">
+            <td>{{ListReservation.name }}</td>
+            <td>{{ListReservation.nbPers }}</td>
+            <td>{{HoursValue[ListReservation.horaire-1] }}</td>
+            <!-- <td>{{statuts[ListReservation.validationStatuts]}}</td> -->
+            <td><button pButton pRipple type="button" icon="pi pi-check" class="p-button-rounded p-button-outlined" (click)="Validate(ListReservation)"></button></td>
+            <td><button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-danger p-button-outlined" ></button></td>
+            
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+
+  <div *ngIf="!changeValidationStatuts">
+    <p-table responsiveLayout="scroll" [value]="ListReservation">
+        <ng-template pTemplate="header" class="header">
+            <tr>
+                <th>Client</th>
+                <th>Nb personnes</th>
+                <th>Heure de réservation</th>
+                <th>Confirmer</th>
+                <th>Annuler</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-ListReservation >
+            <tr *ngIf="ListReservation.validationStatuts == 1">
+            <td>{{ListReservation.name }}</td>
+            <td>{{ListReservation.nbPers }}</td>
+            <td>{{HoursValue[ListReservation.horaire-1] }}</td>
+            <!-- <td>{{statuts[ListReservation.validationStatuts]}}</td> -->
+            <td><button pButton pRipple type="button" icon="pi pi-check" class="p-button-rounded p-button-outlined" (click)="Validate(ListReservation)"></button></td>
+            <td><button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-danger p-button-outlined" ></button></td>
+            
+            </tr>
+        </ng-template>
+    </p-table>
+  </div>
+
+

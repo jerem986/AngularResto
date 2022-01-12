@@ -1,0 +1,16 @@
+.containerToggle{
+    margin-bottom: 10px;
+}
+
+:host::ng-deep{
+
+    .p-togglebutton.p-button.p-highlight:hover {
+        background-color: rgb(157, 206, 171);
+        border:rgb(31, 63, 9);
+    }
+    .p-togglebutton.p-button.p-highlight{
+        background-color: rgb(157, 206, 171);
+        border: white;
+    }
+
+}

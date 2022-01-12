@@ -30,6 +30,8 @@ export class RepasService {
   GetRepasById( id : number) : Observable<RepasDetail[]>{
     return this._client.get<RepasDetail[]>(this.url+"/"+id)
   }
-}
 
-//si recup par id this.url+"/"+id
+  EditRepas(model : RepasDetail) : Observable<boolean>{
+    return this._client.put<boolean>(this.url, model)
+  }
+}

@@ -2,26 +2,64 @@
     <h1> Restaurant Gastronomique </h1>
 </div>
 <div class="all">
-    <img class="img1" src="../../assets/Restaurant/Paris10.jpg" alt="">
-        <div class="title">
-        <h2>Bienvenue chez Gusteau</h2>
-        </div>
 
-    <div class="text">
-        <!-- <h2> Restaurant Gastronomique</h2>
-        <br> -->
-        <p>Le Restaurant "Bienvenue chez Gusteau" est dirigé de façon dynamique et ambitieuse par le jeune et talentueux chef étoilés Linguini et son assistant Rémy </p>
-    </div>
-</div>
     <div class="caroussel">
         <p-carousel [value]="cars" [numVisible]="1" [numScroll]="1" [circular]="true" >
             <ng-template let-car pTemplate="item">
                 <div class="product-item">
                     <div class="product-item-content">
-                                        <img class="{{car.title}}" src={{car.url}} alt="">
+                        <img class="{{car.title}}" src={{car.url}} alt="">
                     </div>
                 </div>
 
             </ng-template>
         </p-carousel>
     </div>
+    <!-- <img class="img1" src="../../assets/Restaurant/Paris10.jpg" alt="">
+        <div class="title">
+        <h2>Bienvenue chez Gusteau</h2>
+        </div> -->
+
+    <div class="text">
+        <p>Le Restaurant "Bienvenue chez Gusteau" est dirigé de façon dynamique et ambitieuse par le jeune et talentueux chef étoilés Linguini et son assistant Rémy </p>
+    </div>
+
+    <div class="takeaway">
+        <img src="../../../assets/Restaurant/Table.jpg" alt="" class="table">
+            <div class="txttakeaway">
+                <p>Menu du jour à emporter</p>
+                <div class="menuDuJour">
+                    {{listRepas[today.getDay()-1].description}} au prix de {{listRepas[today.getDay()-1].prix}}€
+                    <br>
+                    N'hésitez pas à nous contacter pour votre réservation au <p>+32 498 34 29 75</p>
+                </div>
+            </div>
+    </div>
+
+    
+    <div class="footer">
+        <img src="../../../assets/Restaurant/Paris15.jpg" alt="">
+        <div class="info">
+            <p>Restaurant Gastronomique</p>
+            <p>
+                Toon Studio, Parc Walt Disney Studios
+            </p>   
+            <p>
+                77700 Chessy, France
+            </p>
+            <p>
+                +32 498 34 29 75
+            </p>
+            <p>
+                augusteau.resto@gmail.com
+            </p>
+                
+
+        </div>
+
+    </div>
+    <!-- <div class="endfooter">
+        reéaliser par
+    </div> -->
+    
+</div>

@@ -5,10 +5,8 @@
     background-color: white;
     width: 18vw;
     flex-direction: column;
-    //border-right: rgb(0, 0, 0) 2px solid;
     display: flex;
     position:sticky;
-    // overflow: visible;
     padding: 10px;
 }
 
@@ -28,8 +26,10 @@ li{
 }
 
 .try{
-    //width: 80vw;
     flex: 1;
+    // padding-bottom: 2.5rem;
+    // min-height: 100vh;
+    // position: relative;
 }
 
 .roundpoint{
@@ -50,8 +50,6 @@ button{
 ::ng-deep {
     .p-element.p-speeddial-item a {
         background-color: rgb(157, 206, 171);
-        //background-color: rgb(168, 190, 170);
-        ;
     }
 }
 
@@ -75,13 +73,36 @@ button{
         width : 50px;
         height: 50px;
     }
+    .logoco .p-button:hover{
+    background-color: rgb(157, 206, 171);
+    border-color: rgb(255, 255, 255);
+    }
+
 }
 
 ::ng-deep{
-    .logoco .p-button:hover{
-    background-color: rgb(181, 226, 180);
-    border-color: rgb(255, 255, 255);
+    .adminMenu .p-button{
+        background-color: rgb(157, 206, 171);
+        border-color: rgb(255, 255, 255);
     }
+    .adminMenu .p-button:hover{
+        background-color: rgb(157, 206, 171);
+        border-color: rgb(255, 255, 255);
+    }
+
 }
+
+p-sidebar{
+    font-family:'Courier New', Courier, monospace;
+}
+// footer{
+//     margin-left: 18vw;
+//     // position: relative;
+//     height: 150px;
+//     background-color: grey;
+//     bottom: 0px;
+//     left: 0px;
+//     right: 0px;
+// }
 
 

@@ -1,0 +1,12 @@
+<div class="container">
+    <p-calendar  
+            [inline]="true"
+            [minDate]="today"
+            [(ngModel)]="sendDate"
+            >
+    </p-calendar>
+
+    <div class="child">
+        <app-listreservation [selectDate]="sendDate"></app-listreservation>
+    </div>
+</div>

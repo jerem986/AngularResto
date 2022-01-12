@@ -33,9 +33,16 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { StepsModule } from 'primeng/steps';
 import { ListrepasComponent } from './Component/adminchild/repas/listrepas/listrepas.component';
 import { ResConnectedComponent } from './Component/res-connected/res-connected.component';
-import { FillArrayPipe } from './Pipe/fill-array.pipe';
+import { FillArrayPipe } from './Pipe/fill-array/fill-array.pipe';
 import { CalendarModule } from 'primeng/calendar';
 import { SelectButtonModule } from 'primeng/selectbutton';
+import { DateFormatPipe } from './Pipe/dateFormat/date-format.pipe';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import { GoogleLoginProvider } from 'angularx-social-login';
+import { CarteComponent } from './Component/carte/carte.component';
+import { DialogModule } from 'primeng/dialog';
+import { FieldsetModule } from 'primeng/fieldset';
 
 
 
@@ -55,7 +62,8 @@ import { SelectButtonModule } from 'primeng/selectbutton';
     ListrepasComponent,
     ResConnectedComponent,
     FillArrayPipe,
-
+    DateFormatPipe,
+    CarteComponent,
   
   ],
   imports: [
@@ -80,12 +88,30 @@ import { SelectButtonModule } from 'primeng/selectbutton';
     InputTextareaModule,
     CalendarModule,
     StepsModule,
-    SelectButtonModule
+    SelectButtonModule,
+    ConfirmDialogModule,
+    SocialLoginModule,
+    DialogModule,
+    FieldsetModule
     
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}
-  ],
-  bootstrap: [AppComponent]
-})
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '605519960714-hggcuakuj7uh3p3c1i6kvpn20utfvkmu.apps.googleusercontent.com'
+              )
+            }
+          ]
+        } as SocialAuthServiceConfig,
+      }    
+    ],
+    bootstrap: [AppComponent]
+  })
 export class AppModule { }

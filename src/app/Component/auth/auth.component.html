@@ -9,7 +9,7 @@
             </ng-template>
             <div class="username">
                 <div class="texte">
-                    Adresse Email
+                    Adresse email
                 </div>
                     <input type="text" id="inputtext" pInputText formControlName="email" class="p-invalid" > 
             </div>
@@ -25,6 +25,13 @@
                 </div>
             </ng-template>
         </p-card>
+
+        <div class="containerGoogle" style="max-width: 550px">
+            <div>
+                <img class="googleButton" src="../../../assets/GoogleAuth/GoogleButton.PNG" alt="" (click)="loginWithGoogle()">
+            </div>
+        </div>
+
         <div class="bottom">
             <div class="adjust1"> 
                 Nouveau sur notre site?
@@ -66,6 +73,3 @@
     </ng-template>
 </p-toast>
 
-
-
-<!-- ajout de bienvenue avec le nom lorsque je recupere le token je peux aller rechercher le nom du client dans session? -->

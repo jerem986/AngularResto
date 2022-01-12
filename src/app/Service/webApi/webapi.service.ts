@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { RegisterModel } from '../../Model/Register.model';
 import { LoginModel } from '../../Model/Login.model';
+import { SocialUser } from 'angularx-social-login';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,7 @@ import { LoginModel } from '../../Model/Login.model';
 export class WebapiService {
 
   private url : string = environment.urlApi
+  tokenReturn! :Observable<string>
 
   constructor(
     private _client : HttpClient
@@ -22,5 +24,9 @@ export class WebapiService {
 
     LoginAuth(model : LoginModel): Observable<string> {
       return this._client.post<string>(this.url+"Auth/Login",model)
+    }
+
+    LoginWithGoogle(model : SocialUser): Observable<string>{   
+      return this._client.post<string>(this.url+"Auth/OauthGoogle", {token : model.idToken})
     }
 }

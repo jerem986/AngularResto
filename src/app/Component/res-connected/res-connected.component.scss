@@ -1,18 +1,19 @@
 
 .container{
-    width : 80%;
+    width : 70%;
     padding-top: 100px;
     margin: auto;
-    height: 65vh;
-    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+    font-family:'Courier New', Courier, monospace;
 }
 
 .box {
     padding-left: -10px;
+
+    color: gray;
   }
   
   .box select {
-    background-color: #fdfdfd;
+    background-color: #ffffff;
     color: gray;
     padding: 10px;
     width: 200px;
@@ -24,33 +25,40 @@
     outline: none;
   }
   
-  .box::before {
-    content: "\f13a";
-    //font-family: FontAwesome;
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 20%;
-    height: 100%;
-    text-align: center;
-    //font-size: 28px;
-    line-height: 45px;
-    color: rgba(255, 255, 255, 0.5);
-    background-color: rgba(255, 255, 255, 0.1);
-    pointer-events: none;
-  }
+  // .box::before {
+  //   content: "\f13a";
+  //   font-family: FontAwesome;
+  //   position: absolute;
+  //   top: 0;
+  //   right: 0;
+  //   width: 20%;
+  //   height: 100%;
+  //   text-align: center;
+  //   //font-size: 28px;
+  //   line-height: 45px;
+  //   color: rgba(255, 255, 255, 0.5);
+  //   background-color: rgba(255, 255, 255, 0.1);
+  //   pointer-events: none;
+  // }
   
-  .box:hover::before {
-    color: rgba(255, 255, 255, 0.6);
-    background-color: rgba(255, 255, 255, 0.2);
-  }
+  // .box:hover::before {
+  //   color: rgba(255, 255, 255, 0.6);
+  //   background-color: rgba(255, 255, 255, 0.2);
+  // }
   
-  .box select option {
-    padding: 30px;
-  }
+  // .box select option {
+  //   padding: 30px;
+  // }
 
   .box{
     margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: stretch;
+    padding-top: 30px;
   }
 
   .step1{
@@ -63,6 +71,22 @@
     padding-top: 30px;
   }
 
+
+  .nbPers{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: stretch;
+  }
+
+
+  .opt:hover{
+  background: brown;
+  background-color: cadetblue;
+}
+
   .containerCard{
     width: 410px;
     height: 400px;
@@ -72,6 +96,7 @@
   font-size: larger;
   box-shadow: black 1px;
 }
+
 ::ng-deep {
   .p-selectbutton .p-button.p-highlight {
     background: rgb(157, 206, 171);
@@ -87,5 +112,67 @@
   }
   .p-selectbutton .p-button.p-highlight:focus {
     box-shadow: 0 0 0 0.2rem rgb(100, 143, 107);
+  }
+}
+
+::ng-deep{
+  .stepButton{
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    align-content: stretch;
+    position: relative;
+
+    .p-button{
+      background-color: rgb(157, 206, 171);
+      background-color: rgb(157, 206, 171);
+      border-color: white;
+      border: white;
+      margin: 10px;
+    }
+
+    .p-button:hover{
+
+      background-color: rgb(157, 206, 171);
+      border-color: white;
+      border: white;
+    }
+
+    .p-button:focus{
+      box-shadow: 0 0 0 0.2rem rgb(100, 143, 107);
+    }
+  }
+  .p-steps .p-steps-item.p-highlight .p-steps-number {
+    background: rgb(181, 223, 192);
+    color: grey;
+}
+.p-steps .p-steps-item .p-menuitem-link .p-steps-number {
+  border: 1px solid grey;
+}
+}
+
+::ng-deep{
+  .step2{
+    .p-button{
+      background-color: rgb(157, 206, 171);
+      background-color: rgb(157, 206, 171);
+      border-color: white;
+      border: white;
+      margin: 10px;
+    }
+
+    .p-button:hover{
+      background-color: rgb(157, 206, 171);
+      background-color: rgb(157, 206, 171);
+      border-color: white;
+      border: white;
+    }
+
+    .p-button:focus{
+      box-shadow: 0 0 0 0.2rem rgb(100, 143, 107);
+    }
   }
 }

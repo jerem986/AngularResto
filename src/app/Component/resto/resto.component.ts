@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { RepasDetail } from 'src/app/Model/Repas.model';
+import { RepasService } from 'src/app/Service/Repas/repas.service';
 import { Redirect } from '../../Model/Redirect.model';
 
 
@@ -15,10 +17,19 @@ export class RestoComponent implements OnInit {
   { title : 'img2' , url :"../../assets/plats/Photo083sur109.jpg" },
   { title : 'img2' , url :"../../assets/plats/Photo086sur109.jpg" },
 ]
+  listRepas! : RepasDetail[] 
+  today: Date = new Date()
 
-  constructor() { }
+  constructor(
+    private readonly _repService : RepasService
+  ) { }
 
   ngOnInit(): void {
+    this._repService.GetRepasById(9).subscribe((data : RepasDetail[]) =>{
+      this.listRepas = data
+      console.log(this.listRepas);
+      
+    })
   }
 
 }

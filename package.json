@@ -21,6 +21,7 @@
     "@angular/router": "~12.2.0",
     "@fullcalendar/angular": "^5.10.1",
     "@fullcalendar/daygrid": "^5.10.1",
+    "angularx-social-login": "^4.0.1",
     "jwt-decode": "^3.1.2",
     "primeicons": "^4.1.0",
     "primeng": "^12.1.1",

@@ -65,10 +65,8 @@
                     <option *ngFor="let item of listCategory" [ngValue]="item.id">{{item.type}}</option>
                 </select>
             </div>
-            <app-listrepas [selectlist]="varForList"></app-listrepas>
-
-            <!-- <app-listrepas *ngIf="varForList" [selectedItem]="varForList" (monEvent)="reponseDuChildren($event)" ></app-listrepas> -->
+            <div *ngIf="varForList">
+                <app-listrepas [selectlist]="varForList"></app-listrepas>
+            </div>
     </div>
 </div>
-
-<!-- <input type="text" id="inputtext" pInputText formControlName="Description" class="p-invalid">  -->

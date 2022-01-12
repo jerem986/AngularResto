@@ -2,27 +2,24 @@
   <header>
     <div class="layout-sidebar">
       <div class="logo">
-        <a href="">
+        <a [routerLink]="RedirectToResto.url">
           <img src="../assets/Img Acceuil/Gusteau4.jpg" alt="">
         </a>
       </div>
       <div class="list">
         <li>
           <ul>
-            <button pButton type="button" [routerLink]="RedirectToEspritGusteau.url" class="p-button-success p-button-text" label="{{RedirectToEspritGusteau.title}}"></button>
-          </ul>
-          <ul>
             <button pButton type="button" [routerLink]="RedirectToResto.url" class="p-button-success p-button-text" label="{{RedirectToResto.title}}"></button>
           </ul>
           <ul>
-            <button pButton type="button" class="p-button-success p-button-text">Carte</button>
+            <button pButton type="button" [routerLink]="RedirectToEspritGusteau.url" class="p-button-success p-button-text" label="{{RedirectToEspritGusteau.title}}"></button>
+          </ul>
+          <ul>
+            <button pButton type="button" [routerLink]="RedirectToCarte.url" class="p-button-success p-button-text" label="{{RedirectToCarte.title}}"></button>
           </ul>
           <ul>
             <button pButton type="button" [routerLink]="RedirectToReservation.url" class="p-button-success p-button-text" label="{{RedirectToReservation.title}}"></button>
           </ul>
-          <!-- <ul  *ngIf=" _session.user?.userlevel == 'ADMIN'  ">     ce sera pour l'apparition du menu des employé avec liste des réservations et 
-            <button pButton type="button" [routerLink]="RedirectToMenuMaker.url" class="p-button-success p-button-text" label="{{RedirectToMenuMaker.title}}"></button>
-          </ul> -->
           <ul  *ngIf=" _session.user?.userlevel == 'ADMIN'  ">
             <button pButton type="button" [routerLink]="RedirectToMenuMaker.url" class="p-button-success p-button-text" label="{{RedirectToMenuMaker.title}}"></button>
           </ul>
@@ -34,20 +31,65 @@
     </div>
 
   </header>
-  <div class="try">
-    <router-outlet></router-outlet>
+
+      <div class="try">
+      <router-outlet></router-outlet>
+    </div>
   </div>
-</div>
-<div>
 
-</div>
 
-<p-sidebar [(visible)]="display" position="right" [baseZIndex]="10000">
-  <h1 style="font-weight:normal">Bonjour, {{_session.user?.name}}</h1>
-  <p-button type="button" (click)="display = false" label="Se déconnecter" styleClass="p-button-success" (click)="disconnected()"></p-button>
-  <p-button type="button" (click)="display = false" label="Cancel" styleClass="p-button-secondary"></p-button>
-</p-sidebar>
 
+
+<p-sidebar [(visible)]="display" (click)="manualUpdateListReservation()" position="right" [baseZIndex]="10000" [style]="{width:'35em'}">
+  <div >
+    <h3 style="font-weight:normal">Bonjour, {{_session.user?.name}}</h3>
+    <p-button type="button" (click)="display = false" label="Se déconnecter" class="adminMenu"  (click)="disconnected()"></p-button>
+    <p-button type="button" (click)="display = false" label="Cancel" styleClass="p-button-secondary"></p-button>
+  </div>
+
+  <br>
+<h4 class="titreSidebar">Réservation confirmée</h4>
+  <p-table responsiveLayout="scroll" [value]="ListReservation" >
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Annulé la réservation</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-ListReservation>
+        <tr *ngIf="ListReservation.validationStatuts == 1 && parseDate(ListReservation.dateDeRes) >= yesterday">
+          <td>{{parseDate(ListReservation.dateDeRes) | dateFormat }}</td>
+          <td>{{statuts[ListReservation.validationStatuts]}}</td>
+          <td> <button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-danger p-button-outlined" (click)="showConfirm(ListReservation.id)"></button> </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<br>
+<h4 class="titreSidebar">En attente de validation</h4>
+<p-table responsiveLayout="scroll" [value]="ListReservation">
+  <ng-template pTemplate="header" class="header">
+      <tr>
+          <th>Date</th>
+          <th>Status</th>
+          <th>Annulé la réservation</th>
+      </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-ListReservation >
+      <tr *ngIf="ListReservation.validationStatuts == 0 && parseDate(ListReservation.dateDeRes) >= yesterday">
+        <td>{{parseDate(ListReservation.dateDeRes) | dateFormat }}</td>
+        <td>{{statuts[ListReservation.validationStatuts]}}</td>
+        <td><button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-danger p-button-outlined" (click)="showConfirm(ListReservation.id)"></button></td>
+      </tr>
+  </ng-template>
+</p-table>
+
+  </p-sidebar>
+  
   <p-button type="button" class="logoco" *ngIf="_session.user?.userlevel" (click)="display = true" icon="pi pi-user"></p-button>
+
+  
+  <p-confirmDialog [style]="{width: '50vw'}" key="ConfirmDialog"  [baseZIndex]="10000"></p-confirmDialog>
 
 

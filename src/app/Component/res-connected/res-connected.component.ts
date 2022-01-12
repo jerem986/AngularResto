@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api';
 import { VBooking } from 'src/app/Model/VBooking.model';
 import { ReservationService } from 'src/app/Service/Reservation/reservation.service';
@@ -20,12 +21,13 @@ export class ResConnectedComponent implements OnInit {
     }
     
   //   get availablePlace(){
-  //   return this.testVBooking.find(b => b.dateDeRes = this.myFormGroup.controls["date"].value ) 
+  //   return this.testVBooking.find(b => b.dateDeRes = this.myFormGroup.controls["DateDeRes"].value ) 
   // }
 
   midiHours!: any[];
   NoonHours!: any[];
   totalAvalaible?:number
+  HoursValue : string[] = ["12h00", "12h30", "13h00", "13h30", "18h00", "18h30", "19h00", "19h30", "20h00"]
 
   tempVbooking? : VBooking
   
@@ -51,6 +53,7 @@ export class ResConnectedComponent implements OnInit {
     private _formbuild :FormBuilder,
     private _session : SessionService,
     private _reser : ReservationService,
+    private _route : Router
   ) 
   {
       this.midiHours = [
@@ -77,11 +80,11 @@ export class ResConnectedComponent implements OnInit {
       {label: 'Step 3'}
     ];
     this.myFormGroup = this._formbuild.group({
-      id : this._session.user?.id,
+      IdClient : this._session.user?.id,
       nbPers : [null, [Validators.required]],
-      date: [null, [Validators.required]],
+      DateDeRes: [null, [Validators.required]],
       service: [null, [Validators.required]],
-      heure:[null, [Validators.required]]
+      Horaire:[null, [Validators.required]]
     }, Validators.required)
   }
 
@@ -95,30 +98,10 @@ export class ResConnectedComponent implements OnInit {
   }
 
   AddReservation(){
-    console.log(42);
-    
+    this._reser.AddReservation(this.myFormGroup.value).subscribe(data => {
+      this._route.navigate(['resto'])
+    })
   }
-
-//   refreshDate(){
-//     // console.log((this.myFormGroup.value.date).getDate());
-//     // console.log((this.testVBooking));
-//     //console.log(this.myFormGroup.value.service);
-//     // console.log(this.myFormGroup.get('date'));
-//     // console.log(this.myFormGroup.controls['date'].value);
-//     this.testVBooking.map(b => new Date(b.dateDeRes))
-//     console.log(42);
-    
-//     console.log(this.testVBooking);
-    
-//     this.tempVbooking = this.testVBooking.find(b => b.dateDeRes == this.myFormGroup.value.date
-//     && b.isNoon == this.myFormGroup.value.service )
-// console.log(43);
-
-//     console.log(this.testVBooking);
-    
-//     console.log(this.tempVbooking);
-    
-//   }
 
 }
 

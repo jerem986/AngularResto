@@ -1,16 +1,69 @@
 
 <div class="container">
-    <div *ngFor="let item of value1">
+    <div *ngFor="let item of listRepas; let i =index">
         <div class="menuDuJour">
             <p-card>
                 <ng-template pTemplate="header">
-                    item {{item.title}}
+                    <div class="day">
+                        {{jour[i]}}                        
+                    </div>
+                    <div class="plat">
+                        {{item.plat}}
+                    </div>
                 </ng-template>
-                On pourra add ici {{item.url}}
+                Description : <br> <br>
+                {{item.description}}
                 <ng-template pTemplate="footer">
-                    Footer content here numero {{item.url}}
+                    Prix : {{item.prix}}
+                    <br>
+                    <button pButton type="button" icon="pi pi-pencil" class="p-button-rounded p-button-text" (click)="showModalDialog(i)"></button>
                 </ng-template>
             </p-card>
         </div>
     </div>
 </div>
+
+<form [formGroup]="myFormGroup" (ngSubmit)="submit()">
+<p-dialog  [(visible)]="displayModal" [modal]="true" [style]="{width: '50vw'}"
+    [draggable]="false" [resizable]="false" *ngIf="repasEdit">
+    <ng-template pTemplate="header">
+        Edit
+    </ng-template>
+    <div class="username">
+        <div class="texte">
+            Nom
+        </div>
+            <input type="text"  id="inputtext" pInputText formControlName="plat" > 
+            <div class="invalid">
+            {{myFormGroup.controls['plat'].errors ? myFormGroup.controls['plat'].errors['TropCourt'] : ''}} 
+            </div>
+    </div>
+
+    <div class="username">
+        <div class="texte">
+            Description
+        </div>
+            <textarea pInputTextarea rows="5" formControlName="description" class="p-invalid"></textarea>
+            
+            <div class="invalid">
+                {{myFormGroup.controls['description'].errors ? myFormGroup.controls['description'].errors['TropCourt'] : ''}} 
+                <p *ngIf="myFormGroup.controls['description'].value && myFormGroup.controls['description'].invalid"></p>
+
+            </div>
+    </div>
+
+    <div class="username">
+        <div class="texte">
+            Prix
+        </div>
+            <input type="text" id="inputtext" pInputText formControlName="prix" class="p-invalid"> 
+            <div class="invalid">
+                <p *ngIf="myFormGroup.controls['prix'].value && myFormGroup.controls['prix'].invalid"></p>
+            </div>
+    </div>
+    <ng-template pTemplate="footer">
+        <p-button icon="pi pi-check" type="submit" label="Ok" styleClass="p-button-text"></p-button>
+        <p-button icon="pi pi-times" (onClick)="cancel()" label="Annuler" styleClass="p-button-text"></p-button>
+    </ng-template>
+</p-dialog>
+</form>

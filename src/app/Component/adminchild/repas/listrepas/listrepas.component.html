@@ -8,6 +8,7 @@
     </ng-template>
     <ng-template pTemplate="body" let-listRepasRecup>
         <tr>
+            <button pButton type="button" icon="pi pi-trash" class="p-button-rounded p-button-success" (click)="submit(listRepasRecup.id)"></button>
             <td>{{listRepasRecup.plat}}</td>
             <td>{{listRepasRecup.description}}</td>
             <td>{{listRepasRecup.prix}}</td>

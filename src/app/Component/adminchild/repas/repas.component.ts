@@ -34,14 +34,13 @@ export class RepasComponent implements OnInit {
       Prix : [null, [Validators.required]],
     }, Validators.required)
     if(this.varForList){
-
       this._route.navigate(['listerepas/', this.varForList])
     }
   }
 
   submit(){
     this._repService.AddRepas(this.myFormGroup.value).subscribe(data =>{
-      console.log("ajout ok ^^");
+      location.reload()
     })
 
   }
