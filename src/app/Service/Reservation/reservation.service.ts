@@ -29,7 +29,7 @@ export class ReservationService {
   }
 
   GetReservationById(id : number | undefined) : Observable<Reservation[]>{
-    return this._client.get<Reservation[]>(this.url + "Reservation/ReservationById " +id )
+    return this._client.get<Reservation[]>(this.url + "Reservation/ReservationByIdClient " +id )
   }
 
   DeleteReservation(id : number) : Observable<boolean>{

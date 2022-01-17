@@ -40,6 +40,7 @@
             [inline]="true"
             [minDate]="today"
             [disabledDates]="invalidDates"
+            (onMonthChange)="GetVBooking($event)"
             ></p-calendar>
             <div class="containerCard" >
                 <div *ngIf="!myFormGroup.get('DateDeRes')?.value">                    

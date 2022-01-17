@@ -36,7 +36,13 @@ export class ListreservationComponent implements OnInit {
     console.log(reservation);
     
     this._reservationService.UpdateReservation(reservation).subscribe(
+   //() => {
+    //   // toast vert
+    // }, error => {
       
+    // }, () => {
+
+    // }
     )
     this.selectDate
   }

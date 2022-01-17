@@ -26,9 +26,7 @@ export class RestoComponent implements OnInit {
 
   ngOnInit(): void {
     this._repService.GetRepasById(9).subscribe((data : RepasDetail[]) =>{
-      this.listRepas = data
-      console.log(this.listRepas);
-      
+      this.listRepas = data     
     })
   }
 

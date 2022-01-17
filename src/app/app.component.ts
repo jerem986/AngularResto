@@ -72,8 +72,6 @@ ngOnInit() {
     }
     
     this.manualUpdateListReservation()
-    
-    
 }
 
 disconnected(){
@@ -82,12 +80,13 @@ disconnected(){
     this.userLevel = undefined
     window.location.reload();
     location.reload()
+    this._route.navigate(['resto'])
 }
 
 manualUpdateListReservation(){
     this._reservationService.GetReservationById(this._session.user?.id).subscribe(data => {
         this.ListReservation = data
-        
+
     })
 }
 

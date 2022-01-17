@@ -136,7 +136,16 @@ h2{
     position: absolute;
     top: 40px;
     right: 30px;
+
+    a:-webkit-any-link {
+    text-decoration: none;
+    text-decoration: none;
+    color : white;
+    cursor: pointer;
+    }
 }
+
+
 
 
 

@@ -21,6 +21,8 @@ const routes: Routes = [
   {path : 'resConnected', component : ResConnectedComponent},
   {path : 'carte', component : CarteComponent},
 
+  { path : "**", component : RestoComponent },
+
 ];
 
 @NgModule({
@@ -30,4 +32,3 @@ const routes: Routes = [
 export class AppRoutingModule { }
 
 
-//{ path : "", component : AcceuilComponent }, --> crée un index avec page d'acceuil , affichage du plat du jour/ prix etc

@@ -5,7 +5,6 @@ import { MenuItem } from 'primeng/api';
 import { VBooking } from 'src/app/Model/VBooking.model';
 import { ReservationService } from 'src/app/Service/Reservation/reservation.service';
 import { SessionService } from 'src/app/Service/session/session.service';
-import { MinChar } from 'src/app/Validator/MinChar.validator';
 
 @Component({
   selector: 'app-res-connected',
@@ -18,6 +17,7 @@ export class ResConnectedComponent implements OnInit {
   get invalidDates() {
     return this.testVBooking?.filter(b => b.total + this.myFormGroup.controls["nbPers"].value > 30 && b.isNoon == this.myFormGroup.value.service )  //ajout filtre / total salle perso + reser
       .map(b => new Date(b.dateDeRes)) ?? [];
+      
     }
     
   //   get availablePlace(){
@@ -43,7 +43,7 @@ export class ResConnectedComponent implements OnInit {
 
   today = new Date()
   monthNumber! : number
-  month! : string 
+  yearNumber! : number 
 
 
   testVBooking! : VBooking[];
@@ -72,7 +72,8 @@ export class ResConnectedComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._reser.getVBooking(12,2021).subscribe(data => this.testVBooking = data)
+
+    this.GetVBooking({month :this.today.getMonth()+1, year : this.today.getFullYear()})
 
     this.items = [
       {label: 'Step 1'},
@@ -86,10 +87,12 @@ export class ResConnectedComponent implements OnInit {
       service: [null, [Validators.required]],
       Horaire:[null, [Validators.required]]
     }, Validators.required)
+    
   }
 
   next(){
-    this.switchSteps +=1    
+    this.switchSteps +=1 
+
   }
 
   previous(){
@@ -103,6 +106,9 @@ export class ResConnectedComponent implements OnInit {
     })
   }
 
+  GetVBooking(e:any){
+    this._reser.getVBooking(e.month, e.year).subscribe(data => this.testVBooking = data)
+  }
 }
 
 
